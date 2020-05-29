@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class View extends Application {
@@ -26,6 +25,7 @@ public class View extends Application {
         final Scene scene = new Scene(root, Color.LIGHTGREEN);
         stage.setScene(scene);
 
+        controller.fillTheField();
 
         stage.show();
 
