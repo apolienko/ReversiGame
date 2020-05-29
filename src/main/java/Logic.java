@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Logic {
 
-    final private static int[][] board = new int[8][8];
+    final private static byte[][] board = new byte[8][8];
 
     private static boolean moveFlag;
 
