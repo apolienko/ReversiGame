@@ -11,27 +11,38 @@ public class Logic {
 
     private static boolean moveFlag;
 
+    private static boolean impossibleMoveStepBlack;
+    private static boolean impossibleMoveStepWhite;
+
     private static Set<Pair<Integer, Integer>> placeablePositions = new HashSet<>();
 
     private static List<Pair<Integer, Integer>> repaintCell = new ArrayList<>();
+
+    private static byte blackScore;
+    private static byte whiteScore;
 
     // Начало игры
     public void initialize() {
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
                 if (i == 3 && j == 3)
-                    board[i][j] = 1;
+                    board[i][j] = 2;
                 else if (i == 4 && j == 4)
-                    board[i][j] = 1;
+                    board[i][j] = 2;
                 else if (i == 3 && j == 4)
-                    board[i][j] = 2;
+                    board[i][j] = 1;
                 else if (i == 4 && j == 3)
-                    board[i][j] = 2;
+                    board[i][j] = 1;
                 else board[i][j] = 0;
             }
 
         moveFlag = true;
 
+        impossibleMoveStepBlack = false;
+        impossibleMoveStepWhite = false;
+
+        whiteScore = 2;
+        blackScore = 2;
     }
 
     public boolean findCorrectLine(int i, int j, boolean move) {
@@ -295,10 +306,88 @@ public class Logic {
         }
 
         if (move) {
+            updateScores();
             moveFlag = !moveFlag;
         }
 
         return false;
+    }
+
+    public void findPlaceablePositions() {
+        if (impossibleMoveStepBlack && impossibleMoveStepWhite) {
+            repaintCell.clear();
+            return;
+        }
+
+        placeablePositions.clear();
+
+        int currentPlayer = moveFlag ? 2 : 1;
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (board[i][j] == currentPlayer) {
+                    if (j < 7) {
+                        if (board[i][j + 1] == 0)
+                            if (findCorrectLine(i, j + 1, false))
+                                placeablePositions.add(new Pair<>(i, j + 1));
+                        if (i < 7)
+                            if (board[i + 1][j + 1] == 0)
+                                if (findCorrectLine(i + 1, j + 1, false))
+                                    placeablePositions.add(new Pair<>(i + 1, j + 1));
+                        if (i > 0)
+                            if (board[i - 1][j + 1] == 0)
+                                if (findCorrectLine(i - 1, j + 1, false))
+                                    placeablePositions.add(new Pair<>(i - 1, j + 1));
+                    }
+
+                    if (j > 0) {
+                        if (board[i][j - 1] == 0)
+                            if (findCorrectLine(i, j - 1, false))
+                                placeablePositions.add(new Pair<>(i, j - 1));
+                        if (i < 7)
+                            if (board[i + 1][j - 1] == 0)
+                                if (findCorrectLine(i + 1, j - 1, false))
+                                    placeablePositions.add(new Pair<>(i + 1, j - 1));
+                        if (i > 0)
+                            if (board[i - 1][j - 1] == 0)
+                                if (findCorrectLine(i - 1, j - 1, false))
+                                    placeablePositions.add(new Pair<>(i - 1, j - 1));
+                    }
+
+                    if (i < 7)
+                        if (board[i + 1][j] == 0)
+                            if (findCorrectLine(i + 1, j, false))
+                                placeablePositions.add(new Pair<>(i + 1, j));
+
+                    if (i > 0)
+                        if (board[i - 1][j] == 0)
+                            if (findCorrectLine(i - 1, j, false))
+                                placeablePositions.add(new Pair<>(i - 1, j));
+                }
+
+        if (placeablePositions.isEmpty()) {
+            if (moveFlag)
+                impossibleMoveStepBlack = true;
+            else
+                impossibleMoveStepWhite = true;
+
+            moveFlag = !moveFlag;
+            findPlaceablePositions();
+        }
+
+        impossibleMoveStepWhite = false;
+        impossibleMoveStepBlack = false;
+    }
+
+
+    private void updateScores() {
+        if (moveFlag) {
+            blackScore += (byte) repaintCell.size();
+            whiteScore -= (byte) (repaintCell.size() - 1);
+        }
+        else {
+            whiteScore += (byte) repaintCell.size();
+            blackScore -= (byte) (repaintCell.size() - 1);
+        }
     }
 
 }
