@@ -389,4 +389,8 @@ public class Logic {
         }
     }
 
+    public int getValueFromArray(int i, int j) { return board[i][j]; }
+
+    public Set<Pair<Integer, Integer>> getPossibleMoves() { return placeablePositions; }
+
 }

@@ -26,6 +26,7 @@ public class View extends Application {
         stage.setScene(scene);
 
         controller.fillTheField();
+        controller.newGameStart();
 
         stage.show();
 
