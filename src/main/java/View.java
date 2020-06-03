@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class View extends Application {
@@ -21,7 +22,17 @@ public class View extends Application {
         controller.playingField.setLayoutY(50);
         controller.playingField.setGridLinesVisible(true);
 
-        final Group root = new Group(controller.playingField);
+        controller.blackText.setFont(Font.font("Arial", 20));
+        controller.blackScoreText.setFont(Font.font("Arial", 20));
+        controller.whiteText.setFont(Font.font("Arial", 20));
+        controller.whiteScoreText.setFont(Font.font("Arial", 20));
+        controller.whoMove.setFont(Font.font("Arial",20));
+
+        final Group root = new Group(
+                controller.whiteText, controller.whiteScoreText,
+                controller.blackText, controller.blackScoreText,
+                controller.playingField, controller.whoMove
+        );
         final Scene scene = new Scene(root, Color.LIGHTGREEN);
         stage.setScene(scene);
 
@@ -30,6 +41,7 @@ public class View extends Application {
 
         stage.show();
 
+        controller.playingField.setOnMousePressed((e) -> controller.nextMove());
 
     }
 }

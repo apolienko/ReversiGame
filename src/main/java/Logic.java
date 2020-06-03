@@ -389,7 +389,13 @@ public class Logic {
         }
     }
 
+    public byte getWhiteScore() { return whiteScore; }
+
+    public byte getBlackScore() { return blackScore; }
+
     public int getValueFromArray(int i, int j) { return board[i][j]; }
+
+    public List<Pair<Integer, Integer>> getRepaintSquare() { return repaintCell; }
 
     public Set<Pair<Integer, Integer>> getPossibleMoves() { return placeablePositions; }
 
