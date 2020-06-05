@@ -1,8 +1,10 @@
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
 
@@ -18,7 +20,12 @@ public class Controller {
     final Text whiteScoreText = new Text(610, 355, "");
     final Text whoMove = new Text(250, 30, "");
 
+    final Rectangle whoWinRect = new Rectangle();
+    final Text whoWinText = new Text(282, 265, "");
+
     final GridPane playingField = new GridPane();
+
+    final Button reset = new Button("RESET");
 
 
     public void fillTheField() {
@@ -39,9 +46,11 @@ public class Controller {
         for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
             repaintCell(p.getKey(), p.getValue(), 3);
 
-
         whiteScoreText.setText(String.valueOf(logicModel.getWhiteScore()));
         blackScoreText.setText(String.valueOf(logicModel.getBlackScore()));
+
+        whoWinRect.setVisible(false);
+        whoWinText.setVisible(false);
 
         whoMove.setText("Move: Black");
     }
@@ -119,11 +128,32 @@ public class Controller {
     private void giveControlAnotherPlayer() {
         for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
             repaintCell(p.getKey(), p.getValue(), 3);
+        if (logicModel.getMoveFlag())
+            whoMove.setText("Move: Black");
+        else
+            whoMove.setText("Move: White");
+
+        whiteScoreText.setText(String.valueOf(logicModel.getWhiteScore()));
+        blackScoreText.setText(String.valueOf(logicModel.getBlackScore()));
 
     }
 
     private void finishGame() {
+        whoWinRect.setVisible(true);
+        whoWinText.setVisible(true);
 
+        byte black = logicModel.getBlackScore();
+        byte white = logicModel.getWhiteScore();
+
+        whiteScoreText.setText(String.valueOf(white));
+        blackScoreText.setText(String.valueOf(black));
+
+        if (black > white)
+            whoWinText.setText("Black Wins!");
+        else if (white > black)
+            whoWinText.setText("White Wins!");
+        else
+            whoWinText.setText("Drawn Game!");
     }
 
 

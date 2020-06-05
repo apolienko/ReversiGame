@@ -21,6 +21,7 @@ public class View extends Application {
         controller.playingField.setLayoutX(50);
         controller.playingField.setLayoutY(50);
         controller.playingField.setGridLinesVisible(true);
+        controller.playingField.setOnMousePressed((e) -> controller.nextMove());
 
         controller.blackText.setFont(Font.font("Arial", 20));
         controller.blackScoreText.setFont(Font.font("Arial", 20));
@@ -28,10 +29,25 @@ public class View extends Application {
         controller.whiteScoreText.setFont(Font.font("Arial", 20));
         controller.whoMove.setFont(Font.font("Arial",20));
 
+        controller.reset.setLayoutX(540);
+        controller.reset.setLayoutY(250);
+        controller.reset.setOnMouseClicked((e) -> controller.newGameStart());
+
+        controller.whoWinRect.setX(234);
+        controller.whoWinRect.setY(234);
+        controller.whoWinRect.setWidth(200);
+        controller.whoWinRect.setHeight(50);
+        controller.whoWinRect.setFill(Color.ORANGERED);
+        controller.whoWinText.setFont(Font.font(null, 20));
+        controller.whoWinRect.setStroke(Color.BLACK);
+        controller.whoWinRect.setStrokeWidth(2.0);
+
         final Group root = new Group(
-                controller.whiteText, controller.whiteScoreText,
+                controller.whiteText,
+                controller.whiteScoreText, controller.reset,
                 controller.blackText, controller.blackScoreText,
-                controller.playingField, controller.whoMove
+                controller.playingField, controller.whoMove,
+                controller.whoWinRect, controller.whoWinText
         );
         final Scene scene = new Scene(root, Color.LIGHTGREEN);
         stage.setScene(scene);
@@ -40,8 +56,6 @@ public class View extends Application {
         controller.newGameStart();
 
         stage.show();
-
-        controller.playingField.setOnMousePressed((e) -> controller.nextMove());
 
     }
 }

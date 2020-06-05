@@ -393,6 +393,8 @@ public class Logic {
 
     public byte getBlackScore() { return blackScore; }
 
+    public boolean getMoveFlag() { return moveFlag; }
+
     public int getValueFromArray(int i, int j) { return board[i][j]; }
 
     public List<Pair<Integer, Integer>> getRepaintSquare() { return repaintCell; }
