@@ -6,7 +6,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class View extends Application {
-    public static void main(String[] args) { Application.launch(args); }
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
     @Override
     public void start(Stage stage) {

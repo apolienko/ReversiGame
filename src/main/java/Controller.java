@@ -2,11 +2,15 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
+
+import java.io.InputStream;
 
 
 public class Controller {
@@ -25,7 +29,10 @@ public class Controller {
 
     final GridPane playingField = new GridPane();
 
-    final Button reset = new Button("RESET");
+    InputStream input = getClass().getResourceAsStream("reset-photo.png");
+    Image image = new Image(input);
+    ImageView imageView = new ImageView(image);
+    final Button reset = new Button("RESET", imageView);
 
 
     public void fillTheField() {
