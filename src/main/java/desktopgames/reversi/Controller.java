@@ -1,4 +1,4 @@
-package DesktopGames.Reversi;
+package desktopgames.reversi;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;

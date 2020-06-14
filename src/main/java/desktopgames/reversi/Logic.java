@@ -1,4 +1,4 @@
-package DesktopGames.Reversi;
+package desktopgames.reversi;
 
 import javafx.util.Pair;
 import java.util.ArrayList;
