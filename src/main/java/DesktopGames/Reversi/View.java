@@ -1,3 +1,5 @@
+package DesktopGames.Reversi;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -51,6 +53,7 @@ public class View extends Application {
                 controller.playingField, controller.whoMove,
                 controller.whoWinRect, controller.whoWinText
         );
+
         final Scene scene = new Scene(root, Color.LIGHTGREEN);
         stage.setScene(scene);
 

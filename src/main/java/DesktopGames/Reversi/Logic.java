@@ -1,3 +1,5 @@
+package DesktopGames.Reversi;
+
 import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -397,8 +399,8 @@ public class Logic {
 
     public int getValueFromArray(int i, int j) { return board[i][j]; }
 
-    public List<Pair<Integer, Integer>> getRepaintSquare() { return repaintCell; }
+    public List<Pair<Integer, Integer>> getRepaintCell() { return repaintCell; }
 
-    public Set<Pair<Integer, Integer>> getPossibleMoves() { return placeablePositions; }
+    public Set<Pair<Integer, Integer>> getPlaceablePositions() { return placeablePositions; }
 
 }

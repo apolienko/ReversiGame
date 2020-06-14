@@ -1,3 +1,5 @@
+package DesktopGames.Reversi;
+
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,10 +31,7 @@ public class Controller {
 
     final GridPane playingField = new GridPane();
 
-    InputStream input = getClass().getResourceAsStream("reset-photo.png");
-    Image image = new Image(input);
-    ImageView imageView = new ImageView(image);
-    final Button reset = new Button("RESET", imageView);
+    final Button reset = new Button("RESET");
 
 
     public void fillTheField() {
@@ -50,7 +49,7 @@ public class Controller {
                 repaintCell(i, j, logicModel.getValueFromArray(i, j));
 
         logicModel.findPlaceablePositions();
-        for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
+        for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
             repaintCell(p.getKey(), p.getValue(), 3);
 
         whiteScoreText.setText(String.valueOf(logicModel.getWhiteScore()));
@@ -104,7 +103,7 @@ public class Controller {
                                 int j = GridPane.getColumnIndex(source);
 
                                 boolean curFlag = false;
-                                for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
+                                for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
                                     if (p.getKey() == i && p.getValue() == j) {
                                         curFlag = true;
                                         break;
@@ -112,18 +111,18 @@ public class Controller {
 
                                 if (curFlag) {
 
-                                    for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
+                                    for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
                                         repaintCell(p.getKey(), p.getValue(), 0);
 
 
                                     logicModel.findCorrectLine(i, j, true);
 
-                                    for (Pair<Integer, Integer> p : logicModel.getRepaintSquare())
+                                    for (Pair<Integer, Integer> p : logicModel.getRepaintCell())
                                         repaintCell(p.getKey(), p.getValue(),
                                                 logicModel.getValueFromArray(p.getKey(), p.getValue()));
 
                                     logicModel.findPlaceablePositions();
-                                    if (logicModel.getPossibleMoves().isEmpty())
+                                    if (logicModel.getPlaceablePositions().isEmpty())
                                         finishGame();
                                     else
                                         giveControlAnotherPlayer();
@@ -133,7 +132,7 @@ public class Controller {
     }
 
     private void giveControlAnotherPlayer() {
-        for (Pair<Integer, Integer> p : logicModel.getPossibleMoves())
+        for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
             repaintCell(p.getKey(), p.getValue(), 3);
         if (logicModel.getMoveFlag())
             whoMove.setText("Move: Black");
