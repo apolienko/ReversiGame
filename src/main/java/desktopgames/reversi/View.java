@@ -33,9 +33,9 @@ public class View extends Application {
         controller.whiteScoreText.setFont(Font.font("Arial", 20));
         controller.whoMove.setFont(Font.font("Arial",20));
 
-        controller.reset.setLayoutX(540);
-        controller.reset.setLayoutY(250);
-        controller.reset.setOnMouseClicked((e) -> controller.newGameStart());
+        controller.newGameButton.setLayoutX(540);
+        controller.newGameButton.setLayoutY(250);
+        controller.newGameButton.setOnMouseClicked((e) -> controller.newGameStart());
 
         controller.whoWinRect.setX(234);
         controller.whoWinRect.setY(234);
@@ -48,7 +48,7 @@ public class View extends Application {
 
         final Group root = new Group(
                 controller.whiteText,
-                controller.whiteScoreText, controller.reset,
+                controller.whiteScoreText, controller.newGameButton,
                 controller.blackText, controller.blackScoreText,
                 controller.playingField, controller.whoMove,
                 controller.whoWinRect, controller.whoWinText

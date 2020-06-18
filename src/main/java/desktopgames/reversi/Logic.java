@@ -26,16 +26,13 @@ public class Logic {
     public void initialize() {
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
-                if (i == 3 && j == 3)
-                    board[i][j] = 2;
-                else if (i == 4 && j == 4)
-                    board[i][j] = 2;
-                else if (i == 3 && j == 4)
-                    board[i][j] = 1;
-                else if (i == 4 && j == 3)
-                    board[i][j] = 1;
-                else board[i][j] = 0;
+                board[i][j] = 0;
             }
+
+        board[3][3] = 2;
+        board[4][4] = 2;
+        board[3][4] = 1;
+        board[4][3] = 1;
 
         moveFlag = true;
 

@@ -27,7 +27,7 @@ public class Controller {
 
     final GridPane playingField = new GridPane();
 
-    final Button reset = new Button("RESET");
+    final Button newGameButton = new Button("New Game");
 
 
     public void fillTheField() {
