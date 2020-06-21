@@ -8,22 +8,22 @@ import java.util.Set;
 
 public class Logic {
 
-    final private static byte[][] board = new byte[8][8];
+    final private byte[][] board = new byte[8][8];
 
-    private static boolean moveFlag;
+    private boolean moveFlag;
 
-    private static boolean impossibleMoveStepBlack;
-    private static boolean impossibleMoveStepWhite;
+    private boolean impossibleMoveStepBlack;
+    private boolean impossibleMoveStepWhite;
 
-    private static Set<Pair<Integer, Integer>> placeablePositions = new HashSet<>();
+    private Set<Pair<Integer, Integer>> placeablePositions = new HashSet<>();
 
-    private static List<Pair<Integer, Integer>> repaintCell = new ArrayList<>();
+    private List<Pair<Integer, Integer>> repaintCell = new ArrayList<>();
 
-    private static byte blackScore;
-    private static byte whiteScore;
+    private byte blackScore;
+    private byte whiteScore;
 
     // Начало игры
-    public void initialize() {
+    public Logic() {
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
                 board[i][j] = 0;

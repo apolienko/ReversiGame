@@ -16,7 +16,7 @@ public class LogicTest {
     @Test
     public void getters()  {
 
-        logicModel.initialize();
+        logicModel = new Logic();
         logicModel.findCorrectLine(3, 2, true);
 
         List<Pair<Integer, Integer>> trueValue = new ArrayList<>();
@@ -32,7 +32,7 @@ public class LogicTest {
     @Test
     public void findPlaceablePositions() {
 
-        logicModel.initialize();
+        logicModel = new Logic();
         logicModel.findPlaceablePositions();
 
         Set<Pair<Integer, Integer>> trueValue = new HashSet<>();
@@ -48,10 +48,10 @@ public class LogicTest {
     @Test
     public void findCorrectLine() {
 
-        logicModel.initialize();
+        logicModel = new Logic();
         assertTrue(logicModel.findCorrectLine(3, 2, false));
 
-        logicModel.initialize();
+        logicModel = new Logic();
         assertFalse(logicModel.findCorrectLine(0, 0, false));
 
     }

@@ -4,6 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -12,7 +14,7 @@ import javafx.util.Pair;
 
 
 public class Controller {
-    final private Logic logicModel = new Logic();
+    private Logic logicModel = new Logic();
 
     final private static Canvas[][] arrayOfCells = new Canvas[8][8];
 
@@ -39,7 +41,7 @@ public class Controller {
     }
 
     public void newGameStart() {
-        logicModel.initialize();
+        logicModel = new Logic();
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
                 repaintCell(i, j, logicModel.getValueFromArray(i, j));
