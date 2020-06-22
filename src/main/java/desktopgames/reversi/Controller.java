@@ -4,19 +4,16 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
 
-
 public class Controller {
-    private Logic logicModel = new Logic();
+    Logic logicModel = new Logic();
 
-    final private static Canvas[][] arrayOfCells = new Canvas[8][8];
+    final Canvas[][] arrayOfCells = new Canvas[8][8];
 
     final Text blackText = new Text(540, 200, "BLACK: ");
     final Text whiteText = new Text(540, 355, "WHITE: ");
@@ -32,7 +29,7 @@ public class Controller {
     final Button newGameButton = new Button("New Game");
 
 
-    public void fillTheField() {
+    public Controller() {
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
                 arrayOfCells[i][j] = new Canvas(60, 60);
@@ -47,6 +44,7 @@ public class Controller {
                 repaintCell(i, j, logicModel.getValueFromArray(i, j));
 
         logicModel.findPlaceablePositions();
+
         for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
             repaintCell(p.getKey(), p.getValue(), 3);
 
@@ -60,7 +58,7 @@ public class Controller {
     }
 
 
-    private static void repaintCell(int i, int j, int style) {
+    private void repaintCell(int i, int j, int style) {
         GraphicsContext cells = arrayOfCells[i][j].getGraphicsContext2D();
 
         cells.clearRect(0, 0, 60, 60);
@@ -132,6 +130,7 @@ public class Controller {
     private void giveControlAnotherPlayer() {
         for (Pair<Integer, Integer> p : logicModel.getPlaceablePositions())
             repaintCell(p.getKey(), p.getValue(), 3);
+
         if (logicModel.getMoveFlag())
             whoMove.setText("Move: Black");
         else
@@ -161,6 +160,5 @@ public class Controller {
     }
 
 }
-
 
 

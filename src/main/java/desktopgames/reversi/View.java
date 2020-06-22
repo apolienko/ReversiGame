@@ -14,7 +14,8 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) {
-        final Controller controller = new Controller();
+
+        Controller controller = new Controller();
 
         stage.setHeight(610);
         stage.setWidth(670);
@@ -57,7 +58,6 @@ public class View extends Application {
         final Scene scene = new Scene(root, Color.LIGHTGREEN);
         stage.setScene(scene);
 
-        controller.fillTheField();
         controller.newGameStart();
 
         stage.show();

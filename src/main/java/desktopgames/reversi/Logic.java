@@ -8,16 +8,16 @@ import java.util.Set;
 
 public class Logic {
 
-    final private byte[][] board = new byte[8][8];
+    private final byte[][] board = new byte[8][8];
 
     private boolean moveFlag;
 
     private boolean impossibleMoveStepBlack;
     private boolean impossibleMoveStepWhite;
 
-    private Set<Pair<Integer, Integer>> placeablePositions = new HashSet<>();
+    private final Set<Pair<Integer, Integer>> placeablePositions = new HashSet<>();
 
-    private List<Pair<Integer, Integer>> repaintCell = new ArrayList<>();
+    private final List<Pair<Integer, Integer>> repaintCell = new ArrayList<>();
 
     private byte blackScore;
     private byte whiteScore;
@@ -50,7 +50,7 @@ public class Logic {
 
         byte currentPlayer = moveFlag ? (byte) 1 : 2;
 
-        // Справа от (i, j)
+        // Снизу от (i, j)
         if (j != 7) {
             int newJ = j;
             int count = 1;
@@ -75,7 +75,7 @@ public class Logic {
             }
         }
 
-        // Слева от (i, j)
+        // Сверху от (i, j)
         if (j != 0) {
             int newJ = j;
             int count = 1;
@@ -100,7 +100,7 @@ public class Logic {
             }
         }
 
-        // Снизу от (i, j)
+        // Справа от (i, j)
         if (i != 7) {
             int newI = i;
             int count = 1;
@@ -125,7 +125,7 @@ public class Logic {
             }
         }
 
-        // Сверху от (i, j)
+        // Слева от (i, j)
         if (i != 0) {
             int newI = i;
             int count = 1;
@@ -188,7 +188,7 @@ public class Logic {
             }
         }
 
-        // Нижняя левая диагональ от (i, j)
+        // Правая верхняя диагональ от (i, j)
         if (i != 7 && j != 0) {
             int newI = i;
             int newJ = j;
@@ -264,7 +264,7 @@ public class Logic {
             }
         }
 
-        // Правая верхняя диагональ от (i, j)
+        // Нижняя левая диагональ от (i, j)
         if (i != 0 && j != 7) {
             int newI = i;
             int newJ = j;
@@ -319,10 +319,11 @@ public class Logic {
 
         placeablePositions.clear();
 
-        int currentPlayer = moveFlag ? 2 : 1;
+        int previousPlayer = moveFlag ? 2 : 1;
+
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                if (board[i][j] == currentPlayer) {
+                if (board[i][j] == previousPlayer) {
                     if (j < 7) {
                         if (board[i][j + 1] == 0)
                             if (findCorrectLine(i, j + 1, false))
