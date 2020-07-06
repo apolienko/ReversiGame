@@ -58,36 +58,6 @@ public class Controller {
     }
 
 
-    private void repaintCell(int i, int j, int style) {
-        GraphicsContext cells = arrayOfCells[i][j].getGraphicsContext2D();
-
-        cells.clearRect(0, 0, 60, 60);
-
-        cells.setStroke(Color.BLACK);
-        cells.setLineWidth(1.0);
-        cells.strokeRect(0, 0, 60, 60);
-
-        if (style == 1) {
-            cells.setFill(Color.BLACK);
-            cells.fillOval(5, 5, 50,50);
-
-        }
-
-        if (style == 2) {
-            cells.setFill(Color.WHITE);
-            cells.fillOval(5, 5, 50,50);
-            cells.setStroke(Color.BLACK);
-            cells.strokeOval(5, 5, 51,51);
-        }
-
-        if (style == 3) {
-            cells.setStroke(Color.GREEN);
-            cells.setLineWidth(2.0);
-            cells.strokeOval(6, 6, 48,48);
-        }
-
-    }
-
     public void nextMove() {
         playingField.getChildren()
                 .forEach(grid ->
@@ -125,6 +95,36 @@ public class Controller {
                                 }
                             }
                         }));
+    }
+
+    private void repaintCell(int i, int j, int style) {
+        GraphicsContext cells = arrayOfCells[i][j].getGraphicsContext2D();
+
+        cells.clearRect(0, 0, 60, 60);
+
+        cells.setStroke(Color.BLACK);
+        cells.setLineWidth(1.0);
+        cells.strokeRect(0, 0, 60, 60);
+
+        if (style == 1) {
+            cells.setFill(Color.BLACK);
+            cells.fillOval(5, 5, 50,50);
+
+        }
+
+        if (style == 2) {
+            cells.setFill(Color.WHITE);
+            cells.fillOval(5, 5, 50,50);
+            cells.setStroke(Color.BLACK);
+            cells.strokeOval(5, 5, 51,51);
+        }
+
+        if (style == 3) {
+            cells.setStroke(Color.GREEN);
+            cells.setLineWidth(2.0);
+            cells.strokeOval(6, 6, 48,48);
+        }
+
     }
 
     private void giveControlAnotherPlayer() {
